@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+  <!-- the application context definition for the springapp DispatcherServlet -->
+
+  <bean id="productManager" class="com.springPractice.service.SimpleProductManager">
+    <property name="products">
+      <list>
+        <ref bean="product_lamp"/>
+        <ref bean="product_chair"/>
+        <ref bean="product_table"/>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="product_lamp" class="com.springPractice.domain.Product">
+    <property name="description" value="Lamp"/>
+    <property name="price" value="5.75"/>
+  </bean>
+
+  <bean id="product_chair" class="com.springPractice.domain.Product">
+    <property name="description" value="Chair"/>
+    <property name="price" value="22.79"/>
+  </bean>
+
+  <bean id="product_table" class="com.springPractice.domain.Product">
+    <property name="description" value="Table"/>
+    <property name="price" value="75.25"/>
+  </bean>
+
+  <bean name="/hello.htm" class="com.springPractice.controller.InventoryController">
+    <property name="productManager" ref="productManager"/>
+  </bean>
+
+  <bean name="/priceincrease.htm" class="com.springPractice.controller.PriceIncreaseFormController">
+    <property name="sessionForm" value="true"/>
+    <property name="formView" value="priceincrease"/>
+    <property name="commandName" value="priceIncrease"/>
+    <property name="successView" value="hello.htm"/>
+    <property name="productManager" ref="productManager"/>
+    <property name="validator">
+      <bean class="com.springPractice.service.PriceIncreaseValidator"/>
+    </property>
+  </bean>
+
+  <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basename" value="messages"/>
+  </bean>
+
+  <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+  	<property name="prefix" value="/WEB-INF/jsp/"></property>
+  	<property name="suffix" value=".jsp"></property>
+  </bean>
+
+</beans>
