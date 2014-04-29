@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
 
 import com.springPractice.domain.Product;
 
-public class JdbcProductDao extends SimpleJdbcDaoSupport implements ProdcutDao {
+public class JdbcProductDao extends SimpleJdbcDaoSupport implements ProductDao {
 
 	public List<Product> getProductList() {
 		List<Product> products = getSimpleJdbcTemplate().query(

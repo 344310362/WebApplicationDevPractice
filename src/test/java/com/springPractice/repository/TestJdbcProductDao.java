@@ -8,9 +8,9 @@ import com.springPractice.domain.Product;
 
 public class TestJdbcProductDao extends
 		AbstractTransactionalDataSourceSpringContextTests {
-	private ProdcutDao productDao;
+	private ProductDao productDao;
 	
-	public void setProductDao(ProdcutDao productDao){
+	public void setProductDao(ProductDao productDao){
 		this.productDao = productDao;
 	}
 	

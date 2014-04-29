@@ -8,6 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.springPractice.repository.InMemoryProductDao;
+import com.springPractice.repository.ProductDao;
 import com.springPractice.service.SimpleProductManager;
 
 public class TestInventoryController {
@@ -16,7 +18,10 @@ public class TestInventoryController {
 	
 	@Before
 	public void setUp(){
-		controller.setProductManager(new SimpleProductManager());
+		ProductDao productDao = new InMemoryProductDao(null);
+		SimpleProductManager productManager = new SimpleProductManager();
+		productManager.setProductDao(productDao);
+		controller.setProductManager(productManager);
 	}
 	
 	@Test

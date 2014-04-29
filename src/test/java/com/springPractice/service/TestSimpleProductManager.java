@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.springPractice.domain.Product;
+import com.springPractice.repository.InMemoryProductDao;
+import com.springPractice.repository.ProductDao;
 
 public class TestSimpleProductManager {
 	
@@ -18,6 +20,7 @@ public class TestSimpleProductManager {
 	private static final double TABLE_PRICE = 150.10;
 	private SimpleProductManager productManager = new SimpleProductManager();
 	private List<Product> products = new ArrayList<Product>();
+	private ProductDao productDao;
 	@Before
 	public void setUp(){
 		Product product = new Product();
@@ -31,12 +34,14 @@ public class TestSimpleProductManager {
 		product.setPrice(TABLE_PRICE);
 		products.add(product);
 		
-		productManager.setProducts(products);
+		productDao = new InMemoryProductDao(products);
+		productManager.setProductDao(productDao);
 	}
 	
 	@Test
 	public void testGetProductsWithNoProducts() {
 		productManager = new SimpleProductManager();
+		productManager.setProductDao(new InMemoryProductDao(null));
 		assertNull(productManager.getProducts());
 	}
 	
@@ -57,7 +62,7 @@ public class TestSimpleProductManager {
 	public void testIncreasPriceWithEmptyListOfProducts(){
 		try{
 			productManager = new SimpleProductManager();
-			productManager.setProducts(new ArrayList<Product>());
+			productManager.setProductDao(new InMemoryProductDao(new ArrayList<Product>()));
 			productManager.increasePrice(10);
 		}
 		catch(Exception ex){
