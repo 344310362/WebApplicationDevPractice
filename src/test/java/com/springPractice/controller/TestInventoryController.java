@@ -26,13 +26,13 @@ public class TestInventoryController {
 	
 	@Test
 	public void testHelloControllerWillReturnHelloJSPAsView() throws Exception {
-		ModelAndView modelAndView = controller.handleRequest(null, null);
+		ModelAndView modelAndView = controller.handleRequest();
 		assertEquals("hello", modelAndView.getViewName());
 	}
 	
 	@Test
 	public void testHelloControllerWillReturnModelWithParameterNow() throws Exception {
-		ModelAndView modelAndView = controller.handleRequest(null, null);
+		ModelAndView modelAndView = controller.handleRequest();
 		Map model = (Map)modelAndView.getModel().get("model");
 		assertNotNull((String)model.get("now"));
 	}

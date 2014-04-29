@@ -19,12 +19,6 @@ public class TestJdbcProductDao extends
 		return new String[] {"test_context.xml"};
 	}
 	
-//	@Override
-//	protected void onSetUpInTransaction() throws Exception{
-//		super.deleteFromTables(new String[] {"products"});
-//		super.executeSqlScript("test_data.sql", true);
-//	}
-	
 	public void testGetProductList(){
 		List<Product> products = productDao.getProductList();
 		assertEquals("wrong number of products?", 3, products.size());

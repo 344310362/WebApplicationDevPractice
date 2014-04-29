@@ -4,26 +4,26 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
 
 import com.springPractice.service.ProductManager;
 
-public class InventoryController implements Controller{
+@Controller
+public class InventoryController{
 
+	@Autowired
 	private ProductManager productManager;
 
-	public ModelAndView handleRequest(HttpServletRequest arg0,
-			HttpServletResponse arg1) throws Exception {
+	@RequestMapping("/hello.htm")
+	public ModelAndView handleRequest() throws Exception {
 		String now = (new Date()).toString();
-		
+
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("now", now);
-		myModel.put("products", this.productManager.getProducts());
-		
+		myModel.put("products", this.productManager.getProducts());		
 		return new ModelAndView("hello", "model", myModel);
 	}
 	
