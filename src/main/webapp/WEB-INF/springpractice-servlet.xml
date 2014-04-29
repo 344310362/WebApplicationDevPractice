@@ -7,31 +7,6 @@
 
   <!-- the application context definition for the springapp DispatcherServlet -->
 
-  <bean id="productManager" class="com.springPractice.service.SimpleProductManager">
-    <property name="products">
-      <list>
-        <ref bean="product_lamp"/>
-        <ref bean="product_chair"/>
-        <ref bean="product_table"/>
-      </list>
-    </property>
-  </bean>
-
-  <bean id="product_lamp" class="com.springPractice.domain.Product">
-    <property name="description" value="Lamp"/>
-    <property name="price" value="5.75"/>
-  </bean>
-
-  <bean id="product_chair" class="com.springPractice.domain.Product">
-    <property name="description" value="Chair"/>
-    <property name="price" value="22.79"/>
-  </bean>
-
-  <bean id="product_table" class="com.springPractice.domain.Product">
-    <property name="description" value="Table"/>
-    <property name="price" value="75.25"/>
-  </bean>
-
   <bean name="/hello.htm" class="com.springPractice.controller.InventoryController">
     <property name="productManager" ref="productManager"/>
   </bean>
